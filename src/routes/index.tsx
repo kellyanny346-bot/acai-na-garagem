@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle, MapPin, Phone, Instagram, Utensils, Sparkles, Flame, Clock } from "lucide-react";
 import heroImg from "@/assets/hero-acai.jpg";
+import sobreImg from "@/assets/sobre-nos.jpg";
+import imgMiniSalgados from "@/assets/mini-salgados.jpg";
+import img100MiniSalgados from "@/assets/100-mini-salgados.jpg";
+import imgPasteizinhos from "@/assets/pasteizinhos.jpg";
+import img100Pasteizinhos from "@/assets/100-pasteizinhos.jpg";
+import imgBatataP from "@/assets/batata-p.jpg";
+import imgBatataG from "@/assets/batata-g.jpg";
+import imgChurrosNutella from "@/assets/churros-nutella.jpg";
+import imgChurrosDoce from "@/assets/churros-doce.jpg";
 
 const WHATSAPP = "https://wa.me/5583991468820?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido%20no%20A%C3%A7a%C3%AD%20na%20Garagem";
 
@@ -15,14 +24,14 @@ export const Route = createFileRoute("/")({
 });
 
 const salgados = [
-  { name: "Mini Salgados (30 un.)", desc: "Coxinha, bolinha de queijo, pizza e calabresa", price: "12,00" },
-  { name: "100 Mini Salgados", desc: "Sortido — coxinha, queijo, pizza e calabresa", price: "35,00", featured: true },
-  { name: "Pasteizinhos (15 un.)", desc: "Frango, carne ou doce", price: "12,00" },
-  { name: "100 Pasteizinhos", desc: "Sabores variados", price: "70,00" },
-  { name: "Batata Frita P", desc: "Crocante e douradinha", price: "8,00" },
-  { name: "Batata Frita G", desc: "Porção generosa", price: "15,00" },
-  { name: "Churros Nutella (20 un.)", desc: "Recheados de Nutella", price: "12,00" },
-  { name: "Churros Doce de Leite (30 un.)", desc: "Doce de leite cremoso", price: "12,00" },
+  { name: "Mini Salgados (30 un.)", desc: "Coxinha, bolinha de queijo, pizza e calabresa", price: "12,00", image: imgMiniSalgados },
+  { name: "100 Mini Salgados", desc: "Sortido — coxinha, queijo, pizza e calabresa", price: "35,00", featured: true, image: img100MiniSalgados },
+  { name: "Pasteizinhos (15 un.)", desc: "Frango, carne ou doce", price: "12,00", image: imgPasteizinhos },
+  { name: "100 Pasteizinhos", desc: "Sabores variados", price: "70,00", image: img100Pasteizinhos },
+  { name: "Batata Frita P", desc: "Crocante e douradinha", price: "8,00", image: imgBatataP },
+  { name: "Batata Frita G", desc: "Porção generosa", price: "15,00", image: imgBatataG },
+  { name: "Churros Nutella (20 un.)", desc: "Recheados de Nutella", price: "12,00", image: imgChurrosNutella },
+  { name: "Churros Doce de Leite (30 un.)", desc: "Doce de leite cremoso", price: "12,00", image: imgChurrosDoce },
 ];
 
 const combos = [
@@ -192,42 +201,62 @@ function About() {
           title={<>Feito com <span className="text-neon">amor</span>, servido com carinho</>}
           description="O Açaí na Garagem nasceu do sonho de levar o açaí mais cremoso e os lanches mais gostosos de Campina Grande até a sua casa. Ingredientes selecionados, sabor que abraça e um atendimento que faz você voltar sempre."
         />
+        <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/10 shadow-glow">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent z-10" />
+          <img
+            src={sobreImg}
+            alt="Ambiente aconchegante do Açaí na Garagem com iluminação neon roxa"
+            width={1600}
+            height={900}
+            loading="lazy"
+            className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover"
+          />
+        </div>
       </div>
     </section>
   );
 }
 
-function MenuCard({ name, desc, price, featured }: { name: string; desc: string; price: string; featured?: boolean }) {
+function MenuCard({ name, desc, price, featured, image }: { name: string; desc: string; price: string; featured?: boolean; image: string }) {
   return (
     <div
-      className={`relative glass-card rounded-2xl p-5 transition hover:-translate-y-1 hover:border-primary/40 ${
+      className={`relative glass-card overflow-hidden rounded-2xl transition hover:-translate-y-1 hover:border-primary/40 ${
         featured ? "ring-1 ring-primary/50 shadow-neon" : ""
       }`}
     >
       {featured && (
-        <span className="absolute -top-2.5 right-4 rounded-full bg-neon px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neon-foreground">
+        <span className="absolute top-3 right-3 z-10 rounded-full bg-neon px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neon-foreground shadow-neon">
           Mais pedido
         </span>
       )}
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base font-bold leading-tight">{name}</h3>
-          <p className="mt-1 text-xs text-muted-foreground">{desc}</p>
-        </div>
+      <div className="relative h-40 overflow-hidden">
+        <img
+          src={image}
+          alt={name}
+          width={800}
+          height={600}
+          loading="lazy"
+          className="h-full w-full object-cover transition duration-500 hover:scale-110"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
       </div>
-      <div className="mt-4 flex items-end justify-between">
-        <div className="font-display text-2xl font-extrabold text-neon">
-          <span className="text-sm text-muted-foreground mr-1">R$</span>
-          {price}
+      <div className="p-5">
+        <h3 className="font-display text-base font-bold leading-tight">{name}</h3>
+        <p className="mt-1 text-xs text-muted-foreground">{desc}</p>
+        <div className="mt-4 flex items-end justify-between">
+          <div className="font-display text-2xl font-extrabold text-neon">
+            <span className="text-sm text-muted-foreground mr-1">R$</span>
+            {price}
+          </div>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-semibold text-foreground/80 hover:text-neon transition"
+          >
+            Pedir →
+          </a>
         </div>
-        <a
-          href={WHATSAPP}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-semibold text-foreground/80 hover:text-neon transition"
-        >
-          Pedir →
-        </a>
       </div>
     </div>
   );
