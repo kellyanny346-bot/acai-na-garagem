@@ -91,16 +91,6 @@ function NavBar() {
             </a>
           ))}
         </nav>
-        <a
-          href={WHATSAPP}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-neon px-4 py-2.5 text-sm font-semibold text-neon-foreground shadow-neon hover:brightness-110 transition"
-        >
-          <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-          <span className="hidden sm:inline">Pedir no WhatsApp</span>
-          <span className="sm:hidden">Pedir</span>
-        </a>
       </div>
     </header>
   );
